@@ -1,0 +1,42 @@
+@prefix : <http://krauthammerlab.med.yale.edu/nanopub/generif/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdf: <rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"> .
+@prefix dc: <http://purl.org/dc/terms/> .
+@prefix opm: <http://purl.org/net/opmv/ns#> .
+@prefix pav: <http://swan.mindinformatics.org/ontologies/1.2/pav/> .
+@prefix np: <http://www.nanopub.org/nschema#> .
+@prefix npx: <http://krauthammerlab.med.yale.edu/nanopub/> .
+
+:@NPID@_Head {
+    :@NPID@ a :GeneRIFNanopublication .
+
+    :@NPID@ a np:Nanopublication ;
+        np:hasAssertion :@NPID@_Assertion ;
+        np:hasProvenance :@NPID@_Provenance .
+
+    :@NPID@_Provenance np:hasAttribution :@NPID@_Attribution ;
+        np:hasSupporting :@NPID@_Supporting .
+
+    :@NPID@_Assertion a np:Assertion ;
+        np:containsGraph :@NPID@_Assertion_Head ;
+        np:containsGraph :@NPID@_Assertion_Statement .
+}
+
+:@NPID@_Assertion_Head {
+    :@NPID@_Assertion npx:asSentence <http://krauthammerlab.med.yale.edu/aida/@SENTENCE@> .
+    :@NPID@_Assertion rdf:about <http://purl.uniprot.org/taxonomy/@TAXON@> .
+    :@NPID@_Assertion rdf:about <http://www.ncbi.nlm.nih.gov/gene/@GENE@> .
+}
+
+:@NPID@_Attribution {
+    :@NPID@ dc:created "@DATETIME@"^^xsd:dateTime ;
+        pav:createdBy <http://krauthammerlab.med.yale.edu/nanopub/generif/bot> ;
+        pav:versionNumber "1.0" .
+}
+
+:@NPID@_Supporting {
+    :@NPID@ dc:isPartOf :NanopubsFromGeneRIF .
+    :@NPID@ opm:wasDerivedFrom <ftp://ftp.ncbi.nih.gov/gene/GeneRIF/generifs_basic.gz> .
+    :@NPID@ opm:wasDerivedFrom <http://www.ncbi.nlm.nih.gov/pubmed/@PMID@> .
+}
+
